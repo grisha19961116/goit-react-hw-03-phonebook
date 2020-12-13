@@ -1,6 +1,6 @@
 import style from './ContactList.module.css';
 
-const ContactList = ({ contacts, onRemove }) => {
+const ContactList = ({ contacts, onRemove, onRemoveLocal }) => {
   if (contacts.length === 0) return null;
   return (
     <ul>
@@ -9,7 +9,10 @@ const ContactList = ({ contacts, onRemove }) => {
           <li key={id}>
             {name} : {phone}{' '}
             <button
-              onClick={() => onRemove(id)}
+              onClick={() => {
+                onRemoveLocal(id);
+                onRemove(id);
+              }}
               className={style.button__delete}
             >
               Delete

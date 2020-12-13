@@ -14,12 +14,31 @@ class ContactForm extends Component {
   };
   handleFromSubmit = e => {
     e.preventDefault();
+
     const { name, phone } = this.state;
     const { onAdd } = this.props;
     const isValidForm = this.validateFrom();
+
     if (!isValidForm) return;
-    onAdd({ id: uuidv4(), name, phone });
+
+    const newContact = { id: uuidv4(), name, phone };
+
+    onAdd(newContact);
     this.resetForm();
+
+    const savedSettings = localStorage.getItem('name');
+    const parsedSettings = JSON.parse(savedSettings);
+
+    if (parsedSettings === null || parsedSettings.length === 0) {
+      localStorage.setItem('name', JSON.stringify([newContact]));
+      return;
+    }
+
+    if (parsedSettings.length !== 0) {
+      const array = [...parsedSettings, newContact];
+      localStorage.setItem('name', JSON.stringify(array));
+      return;
+    }
   };
   validateFrom = () => {
     const { name, phone } = this.state;
