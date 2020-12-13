@@ -1,0 +1,9 @@
+h2 {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 70px;
+  color: coral;
+  padding-bottom: 2%;
+  padding-top: 2%;
+}

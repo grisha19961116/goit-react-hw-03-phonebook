@@ -1,0 +1,10 @@
+.input__filter {
+  display: block;
+  width: 50%;
+  height: 200px;
+  margin: 0 auto;
+  color: rgb(24, 26, 26);
+  font-size: 60px;
+  border: solid 15px grey;
+  background-color: wheat;
+}

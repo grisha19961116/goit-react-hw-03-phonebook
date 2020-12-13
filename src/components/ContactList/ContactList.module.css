@@ -1,0 +1,22 @@
+ul {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  list-style: none;
+}
+li {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  color: orange;
+  margin-bottom: 5px;
+  font-size: 60px;
+}
+.button__delete {
+  width: 20%;
+  background-color: red;
+  margin: 0;
+  margin-left: 30%;
+}
