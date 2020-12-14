@@ -16,6 +16,21 @@ export default class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const savedSettings = localStorage.getItem('name');
+    const parsedSettings = JSON.parse(savedSettings);
+
+    if (parsedSettings.length > 0) {
+      this.setState({ contacts: parsedSettings });
+    }
+  }
+  componentWillUnmount() {
+    const savedContacts = this.state.contacts;
+    const stringifyContacts = JSON.stringify(savedContacts);
+    localStorage.setItem('name', stringifyContacts);
+  }
+
   handleAddContact = newContact => {
     console.log(`just`);
     this.setState(({ contacts }) => ({
@@ -64,19 +79,6 @@ export default class App extends Component {
     );
   };
 
-  componentDidMount() {
-    const savedSettings = localStorage.getItem('name');
-    const parsedSettings = JSON.parse(savedSettings);
-
-    if (parsedSettings.length > 0) {
-      this.setState({ contacts: parsedSettings });
-    }
-  }
-  componentWillUnmount() {
-    const savedContacts = this.state.contacts;
-    const stringifyContacts = JSON.stringify(savedContacts);
-    localStorage.setItem('name', stringifyContacts);
-  }
   render() {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
