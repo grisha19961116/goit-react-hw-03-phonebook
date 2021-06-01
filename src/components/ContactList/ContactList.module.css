@@ -1,22 +1,46 @@
-ul {
-  width: 80%;
-  display: block;
+.contactUl {
+  width: 94%;
+  display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
+  padding-bottom: 30px;
   list-style: none;
 }
-li {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  height: 150px;
-  color: orange;
-  margin-bottom: 5px;
-  font-size: 60px;
+.contactLi {
+  height: 80px;
+  width: 21%;
+  padding-top: 40px;
+  margin-bottom: 40px;
+  font-size: 25px;
+  color: rgb(10, 7, 7);
 }
-.button__delete {
-  width: 20%;
-  background-color: red;
+.name {
+  width: 100%;
+  display: inline-block;
+  text-align: start;
+  padding: 0;
   margin: 0;
-  margin-left: 30%;
+  margin-bottom: 10px;
+}
+.phone {
+  width: 100%;
+  display: inline-block;
+  text-align: start;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.p__delete {
+  display: block;
+  width: 100px;
+  font-size: 25px;
+  height: auto;
+  text-align: center;
+  background-color: red;
+  color: white;
+  border: solid 3px white;
+  margin: 0;
+}
+.p__delete:hover {
+  background-color: red;
 }

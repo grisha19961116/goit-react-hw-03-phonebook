@@ -8,12 +8,7 @@ import style from './App.module.css';
 
 export default class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -25,32 +20,49 @@ export default class App extends Component {
       this.setState({ contacts: parsedSettings });
     }
   }
+
   componentWillUnmount() {
     const savedContacts = this.state.contacts;
     const stringifyContacts = JSON.stringify(savedContacts);
     localStorage.setItem('name', stringifyContacts);
   }
 
-  handleAddContact = newContact => {
-    console.log(`just`);
+  handleAddContact = newContact =>
     this.setState(({ contacts }) => ({
       contacts: [...contacts, newContact],
     }));
-  };
 
-  handleCheckUniqueContact = name => {
+  handleCheckUniqueContact = (name, phone) => {
     const { contacts } = this.state;
-    const isExistContact = !!contacts.find(contacts => contacts.name === name);
-    isExistContact && alert('Contact is already exist');
-
-    return !isExistContact;
+    const isExistName = contacts.some(contacts => contacts.name === name);
+    const isExistPhone = contacts.some(contacts => contacts.phone === phone);
+    isExistName &&
+      toast.warn('⚠️ You have contact with same name!', {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    isExistPhone &&
+      toast.error('🚀 Number has been using!', {
+        position: 'top-right',
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    return !isExistPhone;
   };
 
-  handleRemoveContact = id => {
+  handleRemoveContact = id =>
     this.setState(({ contacts }) => ({
       contacts: contacts.filter(contact => contact.id !== id),
     }));
-  };
 
   handleRemoveContactFromLocalStor = id => {
     const savedSettings = localStorage.getItem('name');
@@ -69,6 +81,7 @@ export default class App extends Component {
       localStorage.setItem('name', serializedState);
     }
   };
+
   handleFilterChange = filter => this.setState({ filter });
 
   getVisibleContacts = () => {
@@ -85,19 +98,29 @@ export default class App extends Component {
 
     return (
       <>
-        <h2>From Contact</h2>
+        <h2 className={style.titleList}>From Contact</h2>
         <ContactForm
           onAdd={this.handleAddContact}
           onCheckUnique={this.handleCheckUniqueContact}
         />
-        <h2>Contacts list</h2>
-        <Filter filter={filter} onChange={this.handleFilterChange} />
+        <h2 className={style.titleList}>Contacts list</h2>
+        <Filter filter={filter} listenerOnChange={this.handleFilterChange} />
         <ContactList
           contacts={visibleContacts}
-          onRemove={this.handleRemoveContact}
+          listenerOnRemove={this.handleRemoveContact}
           onRemoveLocal={this.handleRemoveContactFromLocalStor}
         />
-        <ToastContainer></ToastContainer>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </>
     );
   }

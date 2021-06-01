@@ -1,9 +1,9 @@
-h2 {
+.titleList {
   display: block;
   margin: 0 auto;
   text-align: center;
   font-size: 70px;
-  color: coral;
+  color: rgb(241, 237, 235);
   padding-bottom: 2%;
   padding-top: 2%;
 }
